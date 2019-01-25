@@ -1,20 +1,23 @@
 sudo: required
 services:
-- docker
+  - docker
+
 before_install:
-- docker build -t realdancollins/docker-react -f Dockerfile.dev .
+  - docker build -t realdancollins/docker-react -f Dockerfile.dev .
+
 script:
-- docker run realdancollins/docker-react npm run test -- --coverage
+  - docker run realdancollins/docker-react npm run test -- --coverage
+
 deploy:
   provider: elasticbeanstalk
-  region: us-east-1
-  app: docker-react
-  env: DockerReact-env
-  bucket_name: elasticbeanstalk-us-east-1-030109945232
-  bucket_path: docker-react
+  region: "us-east-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-030109945232"
+  bucket_path: "docker-react"
   on:
     branch: master
-env:
-  matrix:
-  - secure: LXlcL8hsqIoujI59Qd0dP3vIU233mZYmt7Zibjt5t+O57H0if2oIzPxz8IUEkeyhLxk5biRUarflU+YSC8LeMaL+UDum2ciTa7ZpWTKcX5ev9ha+C86uzJdm9gKayqeVaB1pX3XXXlNwhfRl1H0kac5t+ORo573xisV6/GYz286z59H58Euwf8/oJ5vG0emW9sXSUT9mhhqNomdcMP8/trBz9ecWx5Lj+sYg+GkTOuRIS7woN3Ypy6Fa1QHzCX0cGmTQI5qSev1WjedIrsO0mrtbtvItHQUOPMzTF3sMqa09OZWK1W8hwc5D+ZsuPtokki1198s8RcJZUdYU6Nqh9s6UWPTWswM7hSa4k1wJh9BKlnRbXS/rs4Wz0T5gc9g6pc6v1jYsQ4AJDDZ8XQWsegv6g1Q8+E8+X63tdhEkSMaGgXhQh2RkjUjlY28O8ausxfZtCkB+0mj1ZFB5Ld3R8zD82ufOYWzdY21GPY5NCO75vGvRDq0Wci0p4zA6ccEBaYn/M0ma5DTgF/PzZePv02cKpV8D5Qqyj64G5Xbhb8Nda2CSA9n89t/+8RjrNQnZW51lLvlYxGae/S0jgYv//LPc2nUDDBNtD1wsqDagvihR0A0jZabGESrFXjhsqTj4wmr8/vm5xreFQnY8Y+4KO8KUMoB4AgI/pNjejWa2Fy8=
-  - secure: O/WqTAjQkd0JQCd1OZ2eCOE/7cZvCd42wcqkw1fByALSr9deVbHjhdtv+4AEtwyhVrjP1uw6pYhEzWei6DDoKUxfSLnRctzlgMTVwjtUnl3Se12CtW0mYkxF9aSkTQdBl/Lsri1YBP6a2l+bgjHZw17TMgqSqUlMvgASPRrSIxLDUb1xNETIK2LSrjTZeWoEeGcg+MSGxjcfc2v/dWK+D1iIjHLX2+TFkULDKu18HfjYfbsrkkKK88s/sxfrg3eFoXk+laPvzIWqRX0Oi7Cxls9RVmSfwZW1Qgku8vYE11prCNapiaWZAFyew3sCR+JSBg6OaGx9DNj0WuSTaL4989vw4DArSaK8EJzeSPF/IWyjGeaGmwYzhJXAXhWUnrcQyhXT8VNswYY9l0K+N9BV78N7oCgFNQfY5kpnE+BvIv34QFiv/jM0x07/fGk7nwuYfWVxYq1kqcs747RpYkP4e7j6sCDzmAOqT/TzBx8XRZWvBuecGoGBc9veSw6U8ZgPv/ZVc/RwT0kZ661crMBChugZ7ThAVFV2k+mHcYgzUrcmCeJKSYn/9vMfHHm4uSgRdNLZ8+H1yUvwtgNmUHQ6ZiVw3ZZmg1K5uJ/U4zQiLSERSfXiejkOlWUiT2dQJXqRo63CrQO9RRGgzLaDw9o44eO6IYDvJb9i/ycvx3fchI4=
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+  #  DockerReact-env.xv8sw6ci7t.us-east-1.elasticbeanstalk.com  
